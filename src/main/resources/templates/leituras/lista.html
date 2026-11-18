@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Leituras</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-dark bg-primary mb-4">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/}">🌧️ Cidade em Dia de Chuva</a>
+        <div>
+            <a class="btn btn-sm btn-outline-light" th:href="@{/bairros}">Bairros</a>
+            <a class="btn btn-sm btn-outline-light" th:href="@{/trechos}">Trechos</a>
+            <a class="btn btn-sm btn-light" th:href="@{/leituras}">Leituras</a>
+        </div>
+    </div>
+</nav>
+
+<main class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h3 mb-0">Leituras</h1>
+        <a class="btn btn-success" th:href="@{/leituras/novo}">+ Nova leitura</a>
+    </div>
+
+    <div class="alert alert-danger" th:if="${erro != null}" th:text="${erro}"></div>
+
+    <div class="alert alert-secondary" th:if="${#lists.isEmpty(leituras)}">Nenhuma leitura registrada.</div>
+
+    <table class="table table-striped table-hover bg-white shadow-sm" th:unless="${#lists.isEmpty(leituras)}">
+        <thead class="table-primary">
+        <tr>
+            <th>Data e hora</th>
+            <th>Trecho</th>
+            <th>Lâmina (cm)</th>
+            <th>Status</th>
+            <th class="text-end">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="l : ${leituras}">
+            <td th:text="${#temporals.format(l.dataHora(), 'dd/MM/yyyy HH:mm')}"></td>
+            <td th:text="${l.descricaoTrecho()}"></td>
+            <td th:text="${l.laminaCm()}"></td>
+            <td>
+                <span th:if="${l.status() == 'NORMAL'}" class="badge text-bg-success">NORMAL</span>
+                <span th:if="${l.status() == 'ATENCAO'}" class="badge text-bg-warning">ATENCAO</span>
+                <span th:if="${l.status() == 'ALERTA'}" class="badge text-bg-danger">ALERTA</span>
+            </td>
+            <td class="text-end">
+                <a class="btn btn-sm btn-outline-primary" th:href="@{/leituras/{id}/editar(id=${l.id()})}">Editar</a>
+                <form class="d-inline" method="post"
+                      th:action="@{/leituras/{id}/excluir(id=${l.id()})}"
+                      onsubmit="return confirm('Excluir esta leitura?')">
+                    <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
