@@ -24,7 +24,7 @@ public class LeituraService {
 
     @Transactional
     public LeituraDTO salvar(LeituraDTO dto) {
-        Trecho trecho = trechoService.buscarEntidade(dto.id());
+        Trecho trecho = trechoService.buscarEntidade(dto.trechoId());
         String status = calcularStatus(dto.laminaCm());
         Leitura leitura = mapper.paraEntidade(dto,trecho,status);
         Leitura leituraSalva = repo.save(leitura);
@@ -32,7 +32,7 @@ public class LeituraService {
     }
     @Transactional(readOnly = true)
     public List<LeituraDTO> listar(){
-        return repo.findAllByOrderByDataDesc()
+        return repo.findAllByOrderByDataHoraDesc()
                 .stream()
                 .map(mapper::paraDTO)
                 .toList();
@@ -56,7 +56,7 @@ public class LeituraService {
         } else if (laminaCm < limiarDeAlerta/2){
             return "NORMAL";
         }else {
-            return "ATENCÃO";
+            return "ATENCAO";
         }
     }
 

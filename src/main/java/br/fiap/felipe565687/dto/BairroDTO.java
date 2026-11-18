@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record BairroDTO(
-        Long Id,
+        Long id,
         @NotBlank @Size(max = 80) String nome,
         @NotBlank String zona,
         @NotNull @Min(0) Integer populacao) {

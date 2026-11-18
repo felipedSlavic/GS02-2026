@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface LeituraRepostiory extends JpaRepository<Leitura, Long> {
-    List<Leitura> findAllByOrderByDataDesc();
-    Optional<Leitura> findFirstByTrechoIdOrderByDataDesc(long trechoId);
+    List<Leitura> findAllByOrderByDataHoraDesc();
+    Optional<Leitura> findFirstByTrechoIdOrderByDataHoraDesc(long trechoId);
     boolean existsByTrechoId(long trechoId);
     void deleteByTrechoId(long trechoId);
 }

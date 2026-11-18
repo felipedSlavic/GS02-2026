@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class BairroMapper {
     public Bairro paraEntidade(BairroDTO dto){
         Bairro bairro = new Bairro();
-        bairro.setId(dto.Id());
+        bairro.setId(dto.id());
         bairro.setNome(dto.nome());
         bairro.setZona(dto.zona());
         bairro.setPopulacao(dto.populacao());
