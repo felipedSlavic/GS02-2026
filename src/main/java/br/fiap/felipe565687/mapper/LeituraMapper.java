@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LeituraMapper {
-    public Leitura leitura(LeituraDTO dto, Trecho trecho){
+    public Leitura paraEntidade(LeituraDTO dto, Trecho trecho,String status){
         Leitura leitura = new Leitura();
         leitura.setId(dto.id());
         leitura.setData(dto.data());
         leitura.setLaminaCm(dto.laminaCm());
-        leitura.setStatus(dto.status());
+        leitura.setStatus(status);
         leitura.setTrecho(trecho);
         return leitura;
     }
