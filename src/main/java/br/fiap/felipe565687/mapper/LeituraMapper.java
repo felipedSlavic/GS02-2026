@@ -11,7 +11,7 @@ public class LeituraMapper {
     public Leitura paraEntidade(LeituraDTO dto, Trecho trecho,String status){
         Leitura leitura = new Leitura();
         leitura.setId(dto.id());
-        leitura.setData(dto.data());
+        leitura.setDataHora(dto.dataHora());
         leitura.setLaminaCm(dto.laminaCm());
         leitura.setStatus(status);
         leitura.setTrecho(trecho);
@@ -21,7 +21,7 @@ public class LeituraMapper {
     public LeituraDTO paraDTO(Leitura leitura){
         return new LeituraDTO(
                 leitura.getId(),
-                leitura.getData(),
+                leitura.getDataHora(),
                 leitura.getLaminaCm(),
                 leitura.getStatus(),
                 leitura.getTrecho().getId(),

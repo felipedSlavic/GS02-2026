@@ -15,7 +15,7 @@ public class Bairro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_BAIRRO")
-    private  long id;
+    private  Long id;
 
     @Column(name = "NOME", nullable = false, length = 80)
     private String nome;
@@ -24,6 +24,6 @@ public class Bairro {
     private String zona;
 
     @Column(name = "POPULACAO",nullable = false)
-    private double populacao;
+    private Integer populacao;
 
 }

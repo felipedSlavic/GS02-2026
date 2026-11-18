@@ -13,10 +13,10 @@ public class Trecho {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_TRECHO")
-    private long id;
+    private Long id;
 
     @Column(name = "ALTITUDE", nullable = false)
-    private double altitude;
+    private Integer altitude;
 
     @Column(name = "LOGRADOURO" , nullable = false, length = 120)
     private String logradouro;

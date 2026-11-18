@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface BairroRepository  extends JpaRepository<Bairro, Long> {
     List<Bairro> findAllByOrderByNomeAsc();
-
     List<Bairro> id(long id);
 }

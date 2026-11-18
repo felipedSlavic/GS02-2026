@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface TrechoRepository extends JpaRepository<Trecho , Long> {
     List<Trecho> findAllByOrderByLogradouroAsc();
-    List<Trecho> findByBairro_IdOrderByLogradouroAsc(long bairroId);
-    boolean existsByBairro_Id(long bairroId);
+    List<Trecho> findByBairroIdOrderByLogradouroAsc(long bairroId);
+    boolean existsByBairroId(long bairroId);
 }

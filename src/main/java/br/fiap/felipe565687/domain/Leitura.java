@@ -15,10 +15,10 @@ public class Leitura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_LEITURA")
-    private long id;
+    private Long id;
 
     @Column(name = "DATA_HORA", nullable = false)
-    private LocalDateTime data;
+    private LocalDateTime dataHora;
 
     @Column(name = "LAMINA_CM", nullable = false)
     private int laminaCm;

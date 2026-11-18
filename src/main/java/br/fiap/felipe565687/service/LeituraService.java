@@ -30,7 +30,7 @@ public class LeituraService {
         Leitura leituraSalva = repo.save(leitura);
         return mapper.paraDTO(leituraSalva);
     }
-
+    @Transactional(readOnly = true)
     public List<LeituraDTO> listar(){
         return repo.findAllByOrderByDataDesc()
                 .stream()
@@ -38,23 +38,25 @@ public class LeituraService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
     public LeituraDTO buscarPorId(Long id){
-        Leitura leitura = repo.findById(id).orElseThrow();
+        Leitura leitura = repo.findById(id).orElseThrow(() -> new IllegalArgumentException("A Leitura não foi encontrada"));
         return mapper.paraDTO(leitura);
     }
 
+    @Transactional
     public void excluir(Long id){
         repo.deleteById(id);
     }
 
     public String calcularStatus(int laminaCm){
-        double limiarDeAlerta = 14;
+        int limiarDeAlerta = 14;
         if (laminaCm >= limiarDeAlerta){
             return "ALERTA";
         } else if (laminaCm < limiarDeAlerta/2){
             return "NORMAL";
         }else {
-            return "ATENÇÃO";
+            return "ATENCÃO";
         }
     }
 

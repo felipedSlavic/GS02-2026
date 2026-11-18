@@ -23,7 +23,7 @@ public class TrechoService {
 
     @Transactional
     public TrechoDTO salvar(TrechoDTO dto) {
-        Bairro bairro = bairroService.buscarEntidade(dto.id());
+        Bairro bairro = bairroService.buscarEntidade(dto.bairroId());
         Trecho trecho = mapper.paraEntidade(dto, bairro);
         Trecho trechoSalvo = repo.save(trecho);
         return mapper.paraDTO(trechoSalvo);
@@ -39,20 +39,20 @@ public class TrechoService {
 
     @Transactional(readOnly = true)
     public TrechoDTO buscarPorId(Long id) {
-        Trecho trecho = repo.findById(id).orElseThrow();
+        Trecho trecho = repo.findById(id).orElseThrow(() -> new IllegalArgumentException("O Trecho nao foi encontrado ou não existe"));
         return mapper.paraDTO(trecho);
     }
 
     public Trecho buscarEntidade(Long id){
-        return repo.findById(id).orElseThrow();
+        return repo.findById(id).orElseThrow(() -> new IllegalArgumentException("O Trecho nao foi encontrado"));
     }
 
 
     @Transactional
     public void excluir(Long id) {
         Trecho trecho = buscarEntidade(id);
-        if (leituraRepo.existsByTrecho_Id(id)){
-            leituraRepo.deleteByTrecho_Id(id);
+        if (leituraRepo.existsByTrechoId(id)){
+            leituraRepo.deleteByTrechoId(id);
         }
         repo.delete(trecho);
     }
